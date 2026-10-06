@@ -1,0 +1,33 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+vim.keymap.set("n", "<S-Left>", "<Cmd>BufferLineCyclePrev<CR>", { silent = true })
+vim.keymap.set("n", "<S-Right>", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
+vim.keymap.set("n", "<leader>w<Left>", "<C-w>h", { desc = "Window left" })
+vim.keymap.set("n", "<leader>w<Down>", "<C-w>j", { desc = "Window down" })
+vim.keymap.set("n", "<leader>w<Up>", "<C-w>k", { desc = "Window up" })
+vim.keymap.set("n", "<leader>w<Right>", "<C-w>l", { desc = "Window right" })
+local nvim_tmux_nav = require("nvim-tmux-navigation")
+vim.keymap.set("n", "<C-f>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>w", ":bnext | bd#<CR>", { silent = true })
+
+vim.keymap.set("n", "<C-Left>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+vim.keymap.set("n", "<C-Down>", nvim_tmux_nav.NvimTmuxNavigateDown)
+vim.keymap.set("n", "<C-Up>", nvim_tmux_nav.NvimTmuxNavigateUp)
+vim.keymap.set("n", "<C-Right>", nvim_tmux_nav.NvimTmuxNavigateRight)
+vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+vim.keymap.set("n", "<leader>td", "<Cmd>Td<Cr>", { desc = "todo list" })
+vim.keymap.set("n", "<leader>fy", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy file path" })
+
+vim.keymap.set("n", "<leader>ic", function()
+  Snacks.picker.lsp_incoming_calls()
+end, { desc = "Incoming calls" })
